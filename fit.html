@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Fitness & Natação | Transforme seu Corpo</title>
+    <meta name="description" content="A melhor estrutura de musculação e natação da região. Treinos personalizados e ambiente premium.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome (Ícones) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #00d4ff; /* Azul Moderno */
+            --dark: #0a0a0a;
+            --dark-gray: #1a1a1a;
+            --light: #f4f4f4;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--dark);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- REVEAL ANIMATION --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            padding: 15px 5%;
+            border-bottom: 1px solid #333;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            color: var(--white);
+            text-decoration: none;
+        }
+        .logo span { color: var(--primary); }
+
+        nav ul { display: flex; list-style: none; }
+        nav ul li { margin: 0 20px; }
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        nav ul li a:hover { color: var(--primary); }
+
+        .btn-header {
+            background: var(--primary);
+            color: var(--dark);
+            padding: 10px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+        .btn-header:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+        }
+
+        /* --- HERO --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), 
+                        url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=1920') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 5%;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #ccc;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .btn-main {
+            padding: 18px 35px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        .btn-primary { background: var(--primary); color: var(--dark); }
+        .btn-outline { border: 2px solid var(--white); color: var(--white); }
+        .btn-outline:hover { background: var(--white); color: var(--dark); }
+
+        /* --- SERVIÇOS --- */
+        .section-padding { padding: 100px 5%; }
+        .section-title { text-align: center; margin-bottom: 60px; }
+        .section-title h2 { font-size: 2.5rem; margin-bottom: 10px; }
+        .section-title div { width: 50px; height: 4px; background: var(--primary); margin: 0 auto; }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--dark-gray);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid #333;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+
+        .service-card i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        /* --- PLANOS --- */
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .plan-card {
+            background: var(--dark-gray);
+            padding: 50px 30px;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            border: 1px solid #333;
+        }
+
+        .plan-card.popular {
+            border: 2px solid var(--primary);
+            transform: scale(1.05);
+        }
+
+        .badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: var(--dark);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 800;
+        }
+
+        .price { font-size: 3rem; font-weight: 900; margin: 20px 0; }
+        .price span { font-size: 1rem; color: #888; }
+
+        .plan-features { list-style: none; margin-bottom: 30px; text-align: left; }
+        .plan-features li { margin-bottom: 12px; font-size: 0.9rem; }
+        .plan-features i { color: var(--primary); margin-right: 10px; }
+
+        /* --- WHATSAPP FLOAT --- */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25d366;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* --- RESPONSIVIDADE --- */
+        @media (max-width: 768px) {
+            nav { display: none; }
+            .hero-btns { flex-direction: column; }
+            .plan-card.popular { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header id="header">
+        <a href="#" class="logo">ELITE<span>FIT</span></a>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#estrutura">Estrutura</a></li>
+                <li><a href="#planos">Planos</a></li>
+            </ul>
+        </nav>
+        <a href="https://wa.me/5500000000000" class="btn-header">Começar agora</a>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1 class="reveal">TRANSFORME SEU CORPO.<br>EVOLUA SUA VIDA.</h1>
+            <p class="reveal">Musculação e natação com estrutura de alto padrão e acompanhamento profissional especializado.</p>
+            <div class="hero-btns reveal">
+                <a href="#planos" class="btn-main btn-primary">Agendar aula</a>
+                <a href="https://wa.me/5500000000000" class="btn-main btn-outline">Falar no WhatsApp</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Serviços -->
+    <section class="section-padding" id="servicos">
+        <div class="section-title reveal">
+            <h2>Nossos Serviços</h2>
+            <div></div>
+        </div>
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <i class="fas fa-dumbbell"></i>
+                <h3>Musculação</h3>
+                <p>Equipamentos de última geração e treinos focados no seu objetivo.</p>
+            </div>
+            <div class="service-card reveal">
+                <i class="fas fa-person-swimming"></i>
+                <h3>Natação</h3>
+                <p>Piscina aquecida e coberta com aulas para todos os níveis.</p>
+            </div>
+            <div class="service-card reveal">
+                <i class="fas fa-user-tie"></i>
+                <h3>Personal Trainer</h3>
+                <p>Acompanhamento individualizado para acelerar seus resultados.</p>
+            </div>
+            <div class="service-card reveal">
+                <i class="fas fa-users"></i>
+                <h3>Aulas Coletivas</h3>
+                <p>Crossfit, Yoga e Hidroginástica em horários flexíveis.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Estrutura / Diferenciais -->
+    <section class="section-padding" id="estrutura" style="background: var(--dark-gray);">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 50px;">
+            <div style="flex: 1; min-width: 300px;" class="reveal">
+                <img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&q=80&w=800" alt="Estrutura" style="width: 100%; border-radius: 20px;">
+            </div>
+            <div style="flex: 1; min-width: 300px;" class="reveal">
+                <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Estrutura Premium</h2>
+                <p style="margin-bottom: 30px; color: #ccc;">Ambiente climatizado, vestiários modernos e a melhor infraestrutura da cidade para você focar no que importa: sua saúde.</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div><i class="fas fa-check-circle" style="color: var(--primary);"></i> 100% Climatizado</div>
+                    <div><i class="fas fa-check-circle" style="color: var(--primary);"></i> Estacionamento</div>
+                    <div><i class="fas fa-check-circle" style="color: var(--primary);"></i> Wi-Fi Grátis</div>
+                    <div><i class="fas fa-check-circle" style="color: var(--primary);"></i> App de Treino</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Planos -->
+    <section class="section-padding" id="planos">
+        <div class="section-title reveal">
+            <h2>Nossos Planos</h2>
+            <div></div>
+        </div>
+        <div class="plans-grid">
+            <div class="plan-card reveal">
+                <h3>Básico</h3>
+                <div class="price">R$ 129<span>/mês</span></div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-check"></i> Musculação ilimitada</li>
+                    <li><i class="fas fa-check"></i> Avaliação física mensal</li>
+                    <li><i class="fas fa-xmark" style="color: #555;"></i> Natação inclusa</li>
+                </ul>
+                <a href="https://wa.me/5500000000000" class="btn-header" style="display: block;">Quero este</a>
+            </div>
+            <div class="plan-card popular reveal">
+                <span class="badge">MAIS VENDIDO</span>
+                <h3>Completo</h3>
+                <div class="price">R$ 199<span>/mês</span></div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-check"></i> Musculação + Natação</li>
+                    <li><i class="fas fa-check"></i> Aulas coletivas</li>
+                    <li><i class="fas fa-check"></i> App de treinos premium</li>
+                </ul>
+                <a href="https://wa.me/5500000000000" class="btn-header" style="display: block;">Quero este</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contato -->
+    <footer class="section-padding" style="border-top: 1px solid #333; text-align: center;">
+        <div class="reveal">
+            <h2 style="margin-bottom: 20px;">Onde estamos</h2>
+            <p>Av. Principal, 1000 - Centro, Cidade - UF</p>
+            <p>Segunda a Sexta: 06h às 22h | Sábado: 08h às 14h</p>
+            <div style="margin-top: 30px; font-size: 1.5rem;">
+                <i class="fab fa-instagram" style="margin: 0 10px; cursor: pointer;"></i>
+                <i class="fab fa-facebook" style="margin: 0 10px; cursor: pointer;"></i>
+            </div>
+            <p style="margin-top: 50px; font-size: 0.8rem; color: #555;">&copy; 2024 Elite Fitness - Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/5500000000000" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Mudar Header ao Rolar
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Efeito Reveal (Animação ao rolar)
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
+        // Ativar no load inicial
+        reveal();
+    </script>
+</body>
+</html>
